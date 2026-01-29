@@ -39,3 +39,19 @@
 
 # debug information files
 *.dwo
+
+# Editor cache files
+.zed
+.vscode
+
+# Generated files
+.godot/
+.editorconfig
+.sconsign.dblite
+compile_commands.json
+src/gen/
+
+# Exclude dlls in the build
+demo/addons/GDGDK/libs
+
+#
