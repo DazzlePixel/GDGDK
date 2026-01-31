@@ -1,11 +1,14 @@
 #ifndef GDGDK_MACROS_H
-#define GDGDK_MACROS_H
+#define GDGDK_MACROS_H  
 
-#define GDKOBJECT(m_wrapper_class, m_native_class)\
-private:\
-    m_native_class _native_object = nullptr;\
-\
-public:\
-    static Ref<m_wrapper_class> create(m_native_class obj);    
+#define GETTER(m_var, type)\
+    type get##m_var() const;
 
+#define SETTER(m_var, type)\
+    void set##m_var(type p_value);
+
+#define GETTER_SETTER(m_var, type)\
+    GETTER(m_var, type)\
+    SETTER(m_var, type)
+    
 #endif // GDGDK_MACROS_H

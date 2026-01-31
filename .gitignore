@@ -50,6 +50,7 @@
 .sconsign.dblite
 compile_commands.json
 src/gen/
+.cache/
 
 # Exclude dlls in the build
 demo/addons/GDGDK/libs

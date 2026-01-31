@@ -2,8 +2,6 @@
 import os
 from os.path import splitext
 from pathlib import Path
-import shutil
-import sys
 
 from SCons.Script import ARGUMENTS, Copy, SConscript
 
@@ -75,7 +73,13 @@ if env["platform"] == "windows":
         grdk_path.joinpath("ExtensionLibraries", "Xbox.LibHttpClient", "Lib", "x64")
     ]
     env.Append(LIBPATH=lib_path)
-    env.Append(LINKFLAGS=["xgameruntime.thunks.lib", "Microsoft.Xbox.Services.GDK.C.Thunks.lib", "libHttpClient.GDK.lib"])
+    env.Append(LINKFLAGS=[
+        "xgameruntime.lib",
+        "xgameruntime.thunks.lib", 
+        "Microsoft.Xbox.Services.GDK.C.Thunks.lib", 
+        "libHttpClient.GDK.lib",
+        "advapi32.lib"
+    ])
 
 env.Append(CPPDEFINES=["HC_PLATFORM=HC_PLATFORM_GDK", "HC_DATAMODEL=HC_DATAMODEL_LP64"])
 

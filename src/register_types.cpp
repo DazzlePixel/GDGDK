@@ -1,20 +1,24 @@
 #include "register_types.h"
 #include <godot_cpp/classes/engine.hpp>
+#include <classes/project_settings.hpp>
+
 #include "gdgdk.h"
+#include "gdgdk_user.h"
+#include "gdgdk_xasyncblock.h"
 
 using namespace godot;
 
-static GDGDK* gdgdk;
+static GDGDK* gdgdk = nullptr;
 
 void init_gdgdk(ModuleInitializationLevel p_level) {
-    if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
-        return;
+    if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE) {
+        GDREGISTER_CLASS(GDGDK_XAsyncBlock);
+        GDREGISTER_CLASS(GDGDKUser);
+        GDREGISTER_CLASS(GDGDK);
+        
+        gdgdk = GDGDK::get_instance();
+        Engine::get_singleton()->register_singleton("GDGDK", gdgdk);
     }
-
-    GDREGISTER_CLASS(GDGDK);
-    gdgdk = GDGDK::get_instance();
-    Engine::get_singleton()->register_singleton("GDGDK", gdgdk);
-
 }
 
 void uninit_gdgdk(ModuleInitializationLevel p_level) {
@@ -24,6 +28,7 @@ void uninit_gdgdk(ModuleInitializationLevel p_level) {
 
     Engine::get_singleton()->unregister_singleton("GDGDK");
     memdelete(gdgdk);
+    gdgdk = nullptr;
 }
 
 extern "C" {
