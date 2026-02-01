@@ -2,7 +2,6 @@
 #define GDGDK_XASYNCBLOCK_H
 
 #include <godot_cpp/classes/ref_counted.hpp>
-#include <variant/callable.hpp>
 #include "gdgdk.h"
 #include <XAsync.h>
 

@@ -13,6 +13,17 @@ static GDGDK* gdgdk = nullptr;
 void init_gdgdk(ModuleInitializationLevel p_level) {
     if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE) {
         GDREGISTER_CLASS(GDGDK_XAsyncBlock);
+        GDREGISTER_CLASS(GDKXUserAddOptions);
+        GDREGISTER_CLASS(GDKXUserState);
+        GDREGISTER_CLASS(GDKXUserGamertagComponent);
+        GDREGISTER_CLASS(GDKXUserGamerPictureSize);
+        GDREGISTER_CLASS(GDKXUserAgeGroup);
+        GDREGISTER_CLASS(GDKXUserPrivilege);
+        GDREGISTER_CLASS(GDKXUserPrivilegeOptions);
+        GDREGISTER_CLASS(GDKXUserPrivilegeDenyReason);
+        GDREGISTER_CLASS(GDKXUserGetTokenAndSignatureOptions);
+        GDREGISTER_CLASS(GDKXUserGetTokenAndSignatureData);
+        GDREGISTER_CLASS(GDKXUserSignOutDeferralHandle);
         GDREGISTER_CLASS(GDGDKUser);
         GDREGISTER_CLASS(GDGDK);
         

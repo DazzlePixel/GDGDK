@@ -15,6 +15,10 @@ run/main_scene="uid://bf0xheitiesv2"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[editor]
+
+run/main_run_args="--verbose"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -6,10 +6,34 @@
 #include <Windows.h>
 #include <XError.h>
 #include <XTaskQueue.h>
+#include <core/binder_common.hpp>
+#include <core/gdvirtual.gen.inc>
+#include <XUser.h>
+
+namespace godot {
+
+class GDKXUserChangeEvent: public Object {
+    GDCLASS(GDKXUserChangeEvent, Object)
+    
+protected:
+    static void _bind_methods();
+    
+public:
+    enum Enum: uint32_t {
+        SignedInAgain = 0,
+        SigningOut = 1,
+        SignedOut = 2,
+        Gamertag = 3,
+        GamerPicture = 4,
+        Privileges = 5
+    };
+};
+}
+
+VARIANT_ENUM_CAST(GDKXUserChangeEvent::Enum);
 
 namespace godot {
     class GDGDKLogger;
-    class GDGDKSettings;
 class GDGDK : public Object {
     GDCLASS(GDGDK, Object)
 
@@ -18,6 +42,7 @@ private:
     bool _initialized = false;
     GDGDKLogger* _logger = nullptr;
     XTaskQueueHandle _async_queue = nullptr;
+    XTaskQueueRegistrationToken _change_event_token;
 
 /*------------------------------------------------------------------------ */
 
@@ -32,13 +57,16 @@ public:
     int set_override_locale(const char& locale);
 
     inline XTaskQueueHandle get_async_queue() const { return _async_queue; }
+
+    GDVIRTUAL2(_user_change_event, int, GDKXUserChangeEvent::Enum);
 protected:
     static void _bind_methods();
     void _notification(int p_what);
 
 private:
+    void bind_callbacks();
+    void unbind_callbacks();
 };
 }
-
 
 #endif
